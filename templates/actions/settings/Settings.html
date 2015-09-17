@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="{$wa_url}wa-content/js/farbtastic/farbtastic.css" type="text/css" />
+<script type="text/javascript" src="{$wa_url}wa-content/js/farbtastic/farbtastic.js"></script>
+
+<style type="text/css">
+    {include file="../../../css/forder.css" inline}
+</style>
+
+<style>
+    #plugins-settings-form { min-width: 600px; padding: 0 30px 30px 0; }
+    .s-colorpicker { display: none; margin: -110px 0 0 245px; position: absolute; }
+    .f-order-form { border-color: rgba(244, 244, 244, 1); border-style: solid; border-width: 10px 50px; box-shadow: 1px -1px 5px rgba(0, 0, 0, 0.3); float: right; left: 0; margin: 0 0 50px; position: relative; top: 0; }
+    .tip-block { background: rgba(244, 244, 244, 1); border-color: rgba(244, 244, 244, 1); border-style: solid; border-width: 10px 20px; box-shadow: 1px -1px 5px rgba(0, 0, 0, 0.3); clear: right; float: right; margin: 0 0 25px; position: relative; width: 460px; }
+    .tip-block h3 { font-size: 18px; text-align: center; }
+    .tip-block h3 span { border-bottom: 1px dotted; cursor: pointer; }
+    .tip-block p { display: none; font-size: 13px; margin: 0 0 10px; }
+</style>
+
+<script type="text/javascript">
+    {include file="../../../js/forder.backend.settings.js"}
+</script>
+
+<script type="text/javascript">
+    (function ($) {
+        // forderBackendSettings.initModule();
+    })(jQuery);
+</script>
+
+{include file="../../../../../templates/actions/plugins/PluginsSettings.html"}
