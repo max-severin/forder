@@ -59,7 +59,7 @@ return array(
         'title'        => _wp('«Email» field placeholder'),
         'placeholder'  => _wp('Your Email'),
         'value'        => _wp('Your Email'),
-        'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingEmailControl',
+        'control_type' => waHtmlControl::INPUT,
     ),
     'text_comment_placeholder' => array(
         'title'        => _wp('«Comment» field placeholder'),
@@ -87,13 +87,13 @@ return array(
     ),
     'style_form_height' => array(
         'title'        => _wp('Form height (px)'),
-        'description'  => _wp('Value range 240-440'),
-        'placeholder'  => '300',
-        'value'        => '300',
+        'description'  => _wp('Value range 240-480'),
+        'placeholder'  => '340',
+        'value'        => '340',
         'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingNumberControl',
         'options'      => array(
             'min'  => '240',
-            'max'  => '440',
+            'max'  => '480',
             'step' => '1',
         ),
     ),

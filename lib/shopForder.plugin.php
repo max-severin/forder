@@ -80,26 +80,6 @@ class shopForderPlugin extends shopPlugin {
     }
 
     /**
-     * Generates the HTML code for the user control with ID settingEmailControl for number parametrs
-     * @param string $name
-     * @param array $params
-     * @return string
-     */
-    static public function settingEmailControl($name, $params = array()) {
-
-        $control = '';
-
-        $control_name = htmlentities($name, ENT_QUOTES, 'utf-8');
-
-        $control .= "<input id=\"{$params['id']}\" type=\"email\" name=\"{$control_name}\" ";
-        $control .= self::addCustomParams(array('class', 'placeholder', 'value',), $params);
-        $control .= ">";
-
-        return $control;
-
-    }
-
-    /**
      * Generates the HTML parts of code for the params in user controls added by plugin
      * @param array $list
      * @param array $params
