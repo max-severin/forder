@@ -14,7 +14,7 @@ class shopForderPlugin extends shopPlugin {
     public function frontendHeader() {
         $settings = $this->getSettings();
 
-        if ( $settings['status'] === 'on' && $settings['frontend_head_status'] === 'on' ) {
+        if ( $settings['status'] === 'on' ) {
 
             foreach ($settings as $id => $setting) {
                 $settings[$id] = addslashes(htmlspecialchars($setting));
