@@ -217,7 +217,7 @@ var forderBackendSettings = (function () { "use strict";
         var t = $(this);
 
         if (t.val() === 'on') {
-            addForderForm( $('#s-plugins-content .form'), true );
+            addForderForm( $('#wa-plugins-content .form'), true );
         } else {
             $('.f-order-form').remove();
         }
@@ -255,9 +255,9 @@ var forderBackendSettings = (function () { "use strict";
 
         $('#forder_shop_forder_comment_status').on('change', onCommentStatusChange);
 
-        addTipBlock( $('#s-plugins-content .form') );
+        addTipBlock( $('#wa-plugins-content .form') );
 
-        addForderForm( $('#s-plugins-content .form') );
+        addForderForm( $('#wa-plugins-content .form') );
 
         $(document).on('mouseenter', '.tip-block', tipInfoShow);
 

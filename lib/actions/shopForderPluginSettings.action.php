@@ -4,23 +4,25 @@
  * Class shopForderPluginSettingsAction
  * @author Max Severin <makc.severin@gmail.com>
  */
-class shopForderPluginSettingsAction extends shopPluginsSettingsAction {
+class shopForderPluginSettingsAction extends waViewAction {
 
     public function execute() {
-    	$_GET['id'] = 'forder';
+        $plugin = wa('shop')->getPlugin('forder');
+        $namespace = 'shop_forder';
 
-    	$app_settings_model = new waAppSettingsModel();
-        $settings = $app_settings_model->get(array('shop', 'forder'));
+        $params = array();
+        $params['id'] = 'forder';
+        $params['namespace'] = $namespace;
+        $params['title_wrapper'] = '%s';
+        $params['description_wrapper'] = '<br><span class="hint">%s</span>';
+        $params['control_wrapper'] = '<div class="name">%s</div><div class="value">%s %s</div>';
 
-        foreach ($settings as $id => $setting) {
-            $settings[$id] = addslashes(htmlspecialchars($setting));
-        }
-
-        $view = wa()->getView(); 
-        $view->assign('forder_settings', $settings);
-    	$view->assign('forder_url', wa()->getRouteUrl('shop/frontend/forder/'));
-
-        parent::execute();
+        $settings = $plugin->getSettings();
+        $settings_controls = $plugin->getControls($params);
+        
+        $this->view->assign('forder_settings', $settings);
+        $this->view->assign('settings_controls', $settings_controls);
+        $this->view->assign('forder_url', wa()->getRouteUrl('shop/frontend/forder/'));
     }
 
 }

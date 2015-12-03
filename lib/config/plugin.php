@@ -9,6 +9,7 @@ return array(
     'img' => 'img/forder.png',
     'vendor' => 1020720,
     'shop_settings' => true,
+    'custom_settings' => true,
     'frontend' => true,
     'handlers' => array(
         'frontend_head' => 'frontendHeader',
