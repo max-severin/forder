@@ -64,6 +64,8 @@ var forderBackendSettings = (function () { "use strict";
 
             $content.before(form);
 
+            $('.f-order-form').fadeIn('500');
+
             checkCommentStatus();
         }
     };
@@ -346,9 +348,6 @@ var forderBackendSettings = (function () { "use strict";
         }, 100).animate({
             'top': '0'
         }, 250);
-
-
-        $('.f-order-form').fadeIn('500');
 
     };
 

@@ -2,37 +2,9 @@
 <script type="text/javascript" src="{$wa_url}wa-content/js/farbtastic/farbtastic.js"></script>
 
 <style type="text/css">
-    {include file="../../../css/forder.css" inline}
-
+    {include file="../../../css/forder.frontend.css" inline}
     
-    .fields.form { box-sizing: border-box; min-width: 1024px; padding: 0 220px 0 0; width: 100%; }
-    .field .value input[type="text"] { width: 190px; }
-
-    .helper-tip { padding: 0 250px 0 0; word-wrap: break-word; }
-
-    .CodeMirror { border: 1px solid #eee; }
-    .CodeMirror-scroll { margin: 10px 0 0; width: 100%; }
-
-    .hint .CodeMirror { box-sizing: border-box; height: auto; }
-
-    .s-colorpicker { display: none; margin: -110px 0 0 245px; position: absolute; }
-
-    #button-template-get-origin, #button-style-get-origin { border-bottom: 1px dotted #21a6de; color: #21a6de; float: right; text-decoration: none !important; }
-    #button-template-origin, #button-style-origin { display: none; }
-    #button-template-warning { float: left; color: rgb(255, 51, 51); width: 60%; }
-
-    .f-order-form { border-color: rgba(244, 244, 244, 1); border-style: solid; border-width: 10px 50px; box-shadow: 1px -1px 5px rgba(0, 0, 0, 0.3); display: none; left: inherit; margin: 220px 20px 50px 0; position: absolute; right: 0; top: 0; }
-    
-    .plugin-links { margin: 0 20px 0 0; position: absolute; right: 0; }
-    .plugin-links a { background: gray none repeat scroll 0 0; border-radius: 2px; color: #fefefe!important; display: none; font-size: 1em; margin: 0 0 10px; padding: 10px; position: relative; text-align: center; }
-    .plugin-links a:hover { color: #fefefe!important; }
-    #plugin-review { background: rgb(51, 102, 255) none repeat scroll 0 0; }
-    #more-plugins { background: rgb(255, 102, 51) none repeat scroll 0 0; }
-    #plugin-support { background: rgb(1, 153, 102) none repeat scroll 0 0; }
-
-    @media (max-width: 1280px) {
-        .f-order-form { position: relative; margin: 35px 20px 35px 0; }
-    }
+    {include file="../../../css/forder.backend.css" inline}
 </style>
 
 <script type="text/javascript">
@@ -41,8 +13,8 @@
 
 <div class="plugin-links">
     <a id="plugin-review" href="[`//www.webasyst.com`]/store/plugin/shop/forder/reviews/" target="_blank">[`Give <b>feedback</b>`]</a>
-    <a id="more-plugins" href="[`//www.webasyst.com`]/store/vendor/1020720/" target="_blank">[`Other <b>plugins</b><br /> from the developer`]</a>
-    <a id="plugin-support" href="mailto:makc.severin@gmail.com">[`For all questions`]:<br /><b>makc.severin@gmail.com</b></a>
+    <a id="more-plugins" href="[`//www.webasyst.com`]/store/vendor/1020720/" target="_blank">[`Other <b>products</b><br /> from the developer`]</a>
+    <a id="plugin-support" href="mailto:support@max-severin.com">[`For all questions`]:<br /><b>support@max-severin.com</b></a>
 </div>
 
 <h1>[`Fast order in 1 click`]</h1>
@@ -73,7 +45,7 @@
 </div>
 
 <script type="text/javascript">
-    (function ($) {
+    $(document).ready(function () {
         forderBackendSettings.initModule();
-    })(jQuery);
+    });
 </script>
