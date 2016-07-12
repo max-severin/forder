@@ -13,6 +13,7 @@ return array(
             'on'  => _wp('On'),
         ),
     ),
+
     'comment_status' => array(
         'title'        => _wp('Comment'),
         'description'  => _wp('The opportunity to leave a comment.'),
@@ -23,13 +24,18 @@ return array(
             'on'  => _wp('On'),
         ),
     ),
-    'id_in_html' => array(
-        'title'        => _wp('Selector of the button of fast order'),
-        'description'  => _wp('Specify the ID or class of the html element,<br />when clicking on which will open a form of fast order.<br />Must be like «<b>#fast-order-button</b>» or «<b>.fast-order-button</b>».'),
-        'placeholder'  => '#fast-order-button',
-        'value'        => '#fast-order-button',
-        'control_type' => waHtmlControl::INPUT,
+
+    'product_image' => array(
+        'title'        => _wp('Product image'),
+        'description'  => _wp('Show a product image in the form.'),
+        'value'        => 'off',
+        'control_type' => waHtmlControl::SELECT,
+        'options'      => array(
+            'off' => _wp('Off'),
+            'on'  => _wp('On'),
+        ),
     ),
+
     'phone_masked_input' => array(
         'title'        => _wp('Masked input for phone'),
         'description'  => _wp('If fill this setting will added the mask for the field with the phone number.<br />Tip about masks characters:<br /><b>a</b> - All alphabetic values (A-Z, a-z)<br /><b>9</b> - All numeric values (0-9)<br /><b>*</b> - Any alphanumeric values (A-Z, a-z, 0-9).<br />Leave the field empty, if you do not need mask input.'),
@@ -37,6 +43,7 @@ return array(
         'value'        => '',
         'control_type' => waHtmlControl::INPUT,
     ),
+
     'text_header_title' => array(
         'title'        => _wp('Header text'),
         'placeholder'  => _wp('Fast order'),
@@ -73,6 +80,7 @@ return array(
         'value'        => _wp('Buy'),
         'control_type' => waHtmlControl::INPUT,
     ),
+
     'style_form_width' => array(
         'title'        => _wp('Form width (px)'),
         'description'  => _wp('Value range 320-600'),
@@ -87,13 +95,13 @@ return array(
     ),
     'style_form_height' => array(
         'title'        => _wp('Form height (px)'),
-        'description'  => _wp('Value range 240-480'),
+        'description'  => _wp('Value range 360-540'),
         'placeholder'  => '340',
         'value'        => '340',
         'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingNumberControl',
         'options'      => array(
-            'min'  => '240',
-            'max'  => '480',
+            'min'  => '360',
+            'max'  => '540',
             'step' => '1',
         ),
     ),
@@ -170,6 +178,7 @@ return array(
         'value'        => 'de4d2c',
         'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingColorControl',
     ),
+
     'text_thanks_message' => array(
         'title'        => _wp('«Thanks message» text (appeal)'),
         'placeholder'  => _wp('Thanks') . ',',
@@ -187,6 +196,85 @@ return array(
         'class'        => 's-color',
         'placeholder'  => '717171',
         'value'        => '717171',
+        'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingColorControl',
+    ),
+
+    'button_template' => array(
+        'title'        => _wp('«Fast order» button template'),
+        'description'  => '<a id="button-template-get-origin" href="#">'. _wp('Template source code') .'</a>
+<p id="button-template-warning"><b>'. _wp('Warning') .'</b>: '. _wp('the link must have an attribute') .' <b>id="forder-button"</b></p>
+<br /><br />
+<p id="button-template-origin">
+&#060;a href="{$wa_url}forder/?id={$product_id}" id="forder-button"&#062;'. _wp('Fast Order') .'&#060;/a&#062;
+</p>',
+        'value'        => '<a href="{$wa_url}forder/?id={$product_id}" id="forder-button">'. _wp('Fast Order') .'</a>',
+        'control_type' => waHtmlControl::TEXTAREA,
+    ),
+
+    'button_style' => array(
+        'title'        => _wp('«Fast order» button style'),
+        'description'  => '<a id="button-style-get-origin" href="#">'. _wp('Template source code') .'</a><br /><br />
+<p id="button-style-origin">
+&#060;style&#062;
+  #forder-button {
+    border-radius: 2px;
+    display: block;
+    font-size: 1.1em;
+    font-weight: normal;
+    margin: 15px 0;
+    padding: 10px 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+  }
+  #forder-button:hover {
+    opacity: 1;
+  }
+&#060;/style&#062;
+</p>',
+        'value'        => '<style>
+#forder-button {
+    border-radius: 2px;
+    display: block;
+    font-size: 1.1em;
+    font-weight: normal;
+    margin: 15px 0;
+    padding: 10px 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+#forder-button:hover {
+    opacity: 1;
+}
+</style>',
+        'control_type' => waHtmlControl::TEXTAREA,
+    ),
+
+    'button_color' => array(
+        'title'        => _wp('«Fast Order» button text color'),
+        'class'        => 's-color',
+        'value'        => 'ffffff',
+        'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingColorControl',
+    ),
+    'button_background_color' => array(
+        'title'        => _wp('«Fast Order» button background color'),
+        'class'        => 's-color',
+        'value'        => '21a6de',
+        'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingColorControl',
+    ),
+    'button_color_hover' => array(
+        'title'        => _wp('«Fast Order» button text color on mouse hover'),
+        'class'        => 's-color',
+        'value'        => 'dddddd',
+        'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingColorControl',
+    ),
+    'button_background_color_hover' => array(
+        'title'        => _wp('«Fast Order» button background color on mouse hover'),
+        'class'        => 's-color',
+        'value'        => '1196ce',
         'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingColorControl',
     ),
 );

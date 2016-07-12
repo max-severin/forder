@@ -1,0 +1,28 @@
+<style type="text/css">
+	{include file="../css/forder.css" inline}
+
+	#forder-button {
+		background-color: #{$forder_settings.button_background_color};
+		color: #{$forder_settings.button_color};
+	}
+	#forder-button:hover {
+		background-color: #{$forder_settings.button_background_color_hover};
+		color: #{$forder_settings.button_color_hover};
+	}
+</style>
+
+{$forder_settings.button_style}
+
+{if isset($forder_settings.phone_masked_input) && strlen($forder_settings.phone_masked_input) > 0}
+<script type="text/javascript" src="{$wa_url}wa-apps/shop/plugins/forder/js/jquery.maskedinput.min.js"></script>
+{/if}
+
+<script type="text/javascript">
+	{include file="../js/forder.frontend.js"}
+</script>
+
+<script type="text/javascript">
+	(function ($) {
+	    forderFrontend.initModule();
+	})(jQuery);
+</script>

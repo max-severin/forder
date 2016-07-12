@@ -15,7 +15,13 @@ class shopForderPluginFrontendForderController extends waJsonController {
         $comment = htmlspecialchars( waRequest::post('comment', '', 'str') );
         $product_id = htmlspecialchars( waRequest::post('product_id', '', 'str') );
 
-        if ( isset($settings['status']) && $settings['status'] === 'on' && !empty($name) && !empty($phone) ) {            
+        if ( isset($settings['status']) && $settings['status'] === 'on' && !empty($name) && !empty($phone) && !empty($product_id) ) {  
+
+            if (wa()->getUser()->isAuth()) {
+                $contact = wa()->getUser();
+            } else {
+                $contact = new waContact();
+            }          
 
             if (true) {
 

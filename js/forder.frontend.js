@@ -67,13 +67,13 @@ var forderFrontend = (function () { "use strict";
 		var e = $('.f-order-input').find('input[name="email"]').val();
 		var c = $('.f-order-input').find('textarea[name="comment"]').val();
 		var err = $('<div/>');
-		var currentUrl = window.location.href;
+		var pid = $('input[name="product_id"]').val();
 
 		$('.f-order-error').remove();
 		$('.f-order-input').find('input[name="name"], input[name="phone"]').removeClass('f-order-inp-err');
 
 		if ( n.length > 0 && p.length > 0 ) {
-			$.post("{$forder_url}", { "name": n, "phone": p, "email": e, "comment": c, "url": currentUrl }, function (response) {
+			$.post("{$forder_url}", { "name": n, "phone": p, "email": e, "comment": c, "product_id": pid }, function (response) {
 				if (response.data.status === true) {
 					$('.f-order-input').remove();
 					$('.f-order-form').append(
@@ -109,7 +109,7 @@ var forderFrontend = (function () { "use strict";
 
 	//------------------- BEGIN PUBLIC METHODS --------------------
 	initModule = function () {		
-		$(document).on('click', '{$forder_settings.id_in_html}', onIdinhtmlClick);
+		$(document).on('click', '#forder-button', onIdinhtmlClick);
 
 		$(document).on('click', '.f-order-bg, #f-order-close-x, #f-order-close', removeForderForm);
 

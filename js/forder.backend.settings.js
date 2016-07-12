@@ -10,8 +10,8 @@ var forderBackendSettings = (function () { "use strict";
     var
         farbtastic_url = "{$wa_url}wa-content/js/farbtastic/farbtastic.js?{$wa->version(true)}",
         htmlTagsEncode, htmlTagsDecode,
-        addForderForm, addTipBlock, checkCommentStatus, initColorPicker, setColorPickerElement, setColorPicker, onFormSubmit, changeColorPickerInputValue,
-        textBlockHtmlChange, textPlaceholderChange, textInputValueChange, styleChange, changeHandlers, onStatusChange, onCommentStatusChange, tipInfoShow, tipInfoHide,
+        addForderForm, checkCommentStatus, initColorPicker, setColorPickerElement, setColorPicker, onFormSubmit, changeColorPickerInputValue,
+        textBlockHtmlChange, textPlaceholderChange, textInputValueChange, styleChange, changeHandlers, onStatusChange, onCommentStatusChange,
         initModule;
     //----------------- END MODULE SCOPE VARIABLES ----------------
 
@@ -62,30 +62,10 @@ var forderBackendSettings = (function () { "use strict";
                 '<div class="f-order-input"><input id="f-order-submit" type="submit" value="' + textSubmitButton + '" disabled="disabled" style="' + styleSubmitBackground + styleSubmitTextColor + styleSubmitHeight + styleSubmitWidth + '" /></div>'
             );
 
-            $content.after(form);
+            $content.before(form);
 
             checkCommentStatus();
         }
-    };
-
-    addTipBlock = function ($content) {
-        var tipBlock = $('<div />');
-        var styleFormWidth = parseInt($('#forder_shop_forder_style_form_width').val()) + 60;
-
-        tipBlock.addClass('tip-block').css({
-            'width': styleFormWidth + 'px'
-        }).prepend(
-            '<h3 id="tip-show"><span>{_wp("Tip for setting up")}</span></h3>' + 
-            '<p>{_wp("1) To use the plugin in the Shop app switch on «Status of frontend_head hook» plugin setting and scripts are automatically loaded in your template.")}</p>' + 
-            '<p>{_wp("2) To use the plugin in other apps it is necessary to switch off «Status of frontend_head hook» plugin setting and to insert in the template of your application to the end of the tag &#060;head&#062; the following code:")}</p>' + 
-            '<p><b>&#123;if $wa->shop&#125;&#123;shopCallbPlugin::display()&#125;&#123;/if&#125;</b></p>' + 
-            '<p>{_wp("3) To bind the form to the html-element in the template, you must either create a new or use an existing one.")}</p>' + 
-            '<p>{_wp("For example, you have the template has the following element:")}<br />' + 
-            '<i>&#060;a href="#" id="fast-order-button"&#062;{_wp("Callback")}&#060;a&#062;</i></p>' + 
-            '<p>{_wp("Specify in the «Selector of the button of callback form» plugin setting the next - <b>#fast-order-button</b> - and after clicking on this item will open the callback form.")}</p>'
-        );
-
-        $content.after(tipBlock);
     };
 
     checkCommentStatus = function () {
@@ -237,31 +217,18 @@ var forderBackendSettings = (function () { "use strict";
         var color = 0xFFFFFF & parseInt(('' + input.value + 'FFFFFF').replace(/[^0-9A-F]+/gi, '').substr(0, 6), 16);
         $color.css('background', (0xF000000 | color).toString(16).toUpperCase().replace(/^F/, '#'));
     };
-
-    tipInfoShow = function () {
-        $('.tip-block p').show();
-    };
-
-    tipInfoHide = function () {
-        $('.tip-block p').hide();
-    };
     //------------------- END EVENT HANDLERS ----------------------
 
     //------------------- BEGIN PUBLIC METHODS --------------------
     initModule = function () {
+
         $('#plugins-settings-form').on('submit', onFormSubmit);
 
         $('#forder_shop_forder_status').on('change', onStatusChange);
 
         $('#forder_shop_forder_comment_status').on('change', onCommentStatusChange);
 
-        addTipBlock( $('#wa-plugins-content .form') );
-
         addForderForm( $('#wa-plugins-content .form') );
-
-        $(document).on('mouseenter', '.tip-block', tipInfoShow);
-
-        $(document).on('mouseleave', '.tip-block', tipInfoHide);
 
         var color_elements = [
             '#forder_shop_forder_style_form_background',
@@ -271,7 +238,11 @@ var forderBackendSettings = (function () { "use strict";
             '#forder_shop_forder_style_submit_text_color',
             '#forder_shop_forder_style_close_ok_background',
             '#forder_shop_forder_style_close_error_background',
-            '#forder_shop_forder_style_thanks_text_color'
+            '#forder_shop_forder_style_thanks_text_color',
+            '#forder_shop_forder_button_color',
+            '#forder_shop_forder_button_background_color',
+            '#forder_shop_forder_button_color_hover',
+            '#forder_shop_forder_button_background_color_hover'
         ];
         initColorPicker( color_elements, setColorPicker );
 
@@ -285,11 +256,100 @@ var forderBackendSettings = (function () { "use strict";
                 var $color = $(input).parent().find('.icon16.color');
                 changeColorPickerInputValue(input, $color);
             }, 300);
+        });var cm1 = CodeMirror.fromTextArea(document.getElementById('forder_shop_forder_button_template'), {
+            mode: "text/html",
+            tabMode: "indent",
+            height: "dynamic",
+            lineWrapping: true
+        });   
+
+        var cm2 = CodeMirror.fromTextArea(document.getElementById('forder_shop_forder_button_style'), {
+            mode: "text/html",
+            tabMode: "indent",
+            height: "dynamic",
+            lineWrapping: true
+        });   
+
+        var buttonTemplate = document.getElementById("button-template-origin");
+        var cm3 = CodeMirror(function(node){
+            buttonTemplate.parentNode.replaceChild(node, buttonTemplate);
+        }, {
+            value: buttonTemplate.textContent || buttonTemplate.innerText,
+            mode: "text/html",
+            readOnly: true
+        });   
+
+        var buttonStyle = document.getElementById("button-style-origin");
+        var cm4 = CodeMirror(function(node){
+            buttonStyle.parentNode.replaceChild(node, buttonStyle);
+        }, {
+            value: buttonStyle.textContent || buttonStyle.innerText,
+            mode: "text/html",
+            readOnly: true
+        }); 
+
+        $('#button-template-get-origin').closest('.hint').find('.CodeMirror').hide();
+        $('#button-style-get-origin').closest('.hint').find('.CodeMirror').hide();
+
+        $('body').on('click', '#button-template-get-origin', function () {
+            $(this).closest('.hint').find('.CodeMirror').toggle();
+            return false;
         });
+
+        $('body').on('click', '#button-style-get-origin', function () {
+            $(this).closest('.hint').find('.CodeMirror').toggle();
+            return false;
+        });
+
+        $('#forder_shop_forder_button_template').closest('.field').find('.CodeMirror').css('height', '95px');
+        $('#forder_shop_forder_button_template').closest('.field').find('.CodeMirror-scroll').css('height', '65px');
 
         changeHandlers();
 
         checkCommentStatus();
+
+        $('.plugin-links a#plugin-review').css({
+            'display': 'block',
+            'top': '-2000px'
+        }).animate({
+            'top': '0'
+        }, 1500).animate({
+            'top': '-25px'
+        }, 100).animate({
+            'top': '-35px'
+        }, 100).animate({
+            'top': '0'
+        }, 250);
+
+        $('.plugin-links a#more-plugins').css({
+            'display': 'block',
+            'top': '-1000px'
+        }).animate({
+            'top': '0'
+        }, 1000).animate({
+            'top': '-25px'
+        }, 100).animate({
+            'top': '-35px'
+        }, 100).animate({
+            'top': '0'
+        }, 250);
+
+        $('.plugin-links a#plugin-support').css({
+            'display': 'block',
+            'top': '-500px'
+        }).animate({
+            'top': '0'
+        }, 500).animate({
+            'top': '-25px'
+        }, 100).animate({
+            'top': '-35px'
+        }, 100).animate({
+            'top': '0'
+        }, 250);
+
+
+        $('.f-order-form').fadeIn('500');
+
     };
 
     return {

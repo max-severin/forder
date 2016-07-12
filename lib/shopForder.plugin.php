@@ -11,19 +11,17 @@ class shopForderPlugin extends shopPlugin {
      * Handler for frontend_head event: add forderFrontend module in frontend head section
      * @return string
      */
-    public function frontendHeader() {
+    public function frontendHead() {
         $settings = $this->getSettings();
 
         if ( $settings['status'] === 'on' ) {
 
-            foreach ($settings as $id => $setting) {
-                $settings[$id] = addslashes(htmlspecialchars($setting));
-            }
-
             $view = wa()->getView();
             $view->assign('forder_settings', $settings);
-        	$view->assign('forder_url', wa()->getRouteUrl('shop/frontend/forder/'));
-            $html = $view->fetch($this->path.'/templates/Frontend.html');
+
+            $button_style = $view->fetch('string:' . $settings['button_style']);
+
+            $html = $view->fetch($this->path.'/templates/FrontendHead.html');
 
             return $html;
 
@@ -32,6 +30,32 @@ class shopForderPlugin extends shopPlugin {
             return;
 
         }
+    }
+    
+    /**
+     * Frontend method displays view button
+     * @return string
+     */
+    static function displayButton($product_id) {
+
+        $app_settings_model = new waAppSettingsModel();
+        $settings = $app_settings_model->get(array('shop', 'forder'));
+
+        if (isset($settings['status']) && $settings['status'] === 'on' && isset($settings['button_template']) && $settings['button_template']) {                
+
+            $view = wa()->getView(); 
+
+            $view->assign('product_id', $product_id);
+            $view->assign('settings', $settings);
+
+            // $html = $view->fetch(realpath(dirname(__FILE__)."/../").'/templates/FrontendButton.html');
+            $html = $view->fetch('string:' . $settings['button_template']);
+
+            return $html;
+
+        }
+
+        return;
     }
 
     /**
