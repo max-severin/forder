@@ -219,6 +219,7 @@ return array(
   #forder-button {
     border: 0 none;
     border-radius: 2px;
+    cursor: pointer;
     display: block;
     font-size: 1.1em;
     font-weight: normal;
@@ -238,6 +239,7 @@ return array(
 #forder-button {
     border: 0 none;
     border-radius: 2px;
+    cursor: pointer;
     display: block;
     font-size: 1.1em;
     font-weight: normal;
@@ -278,5 +280,11 @@ return array(
         'class'        => 's-color',
         'value'        => '1196ce',
         'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingColorControl',
+    ),
+
+    'final_js_code' => array(
+        'title'        => _wp('Additional JavaScript code after ordering'),
+        'value'        => 'alert(777);',
+        'control_type' => waHtmlControl::TEXTAREA,
     ),
 );

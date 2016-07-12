@@ -258,7 +258,9 @@ var forderBackendSettings = (function () { "use strict";
                 var $color = $(input).parent().find('.icon16.color');
                 changeColorPickerInputValue(input, $color);
             }, 300);
-        });var cm1 = CodeMirror.fromTextArea(document.getElementById('forder_shop_forder_button_template'), {
+        });
+
+        var cm1 = CodeMirror.fromTextArea(document.getElementById('forder_shop_forder_button_template'), {
             mode: "text/html",
             tabMode: "indent",
             height: "dynamic",
@@ -271,6 +273,13 @@ var forderBackendSettings = (function () { "use strict";
             height: "dynamic",
             lineWrapping: true
         });   
+
+        var cm3 = CodeMirror.fromTextArea(document.getElementById('forder_shop_forder_final_js_code'), {
+            mode: "text/javascript",
+            tabMode: "indent",
+            height: "dynamic",
+            lineWrapping: true
+        });  
 
         var buttonTemplate = document.getElementById("button-template-origin");
         var cm3 = CodeMirror(function(node){
