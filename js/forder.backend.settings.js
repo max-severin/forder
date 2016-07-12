@@ -301,7 +301,7 @@ var forderBackendSettings = (function () { "use strict";
             return false;
         });
 
-        $('#forder_shop_forder_button_template').closest('.field').find('.CodeMirror').css('height', '95px');
+        $('#forder_shop_forder_button_template').closest('.field').find('.CodeMirror').css({ 'margin-top': '40px', 'height': '95px' });
         $('#forder_shop_forder_button_template').closest('.field').find('.CodeMirror-scroll').css('height', '65px');
 
         changeHandlers();

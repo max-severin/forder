@@ -202,12 +202,12 @@ return array(
     'button_template' => array(
         'title'        => _wp('«Fast order» button template'),
         'description'  => '<a id="button-template-get-origin" href="#">'. _wp('Template source code') .'</a>
-<p id="button-template-warning"><b>'. _wp('Warning') .'</b>: '. _wp('the link must have an attribute') .' <b>id="forder-button"</b></p>
+<p id="button-template-warning"><b>'. _wp('Warning') .'</b>: '. _wp('the link must have attributes') .'<br /><b>href="{$wa->getUrl(\'/frontend/forder/\')}?id={$product_id}"</b><br /><b>class="forder-button"</b></p>
 <br /><br />
 <p id="button-template-origin">
-&#060;a href="{$wa_url}forder/?id={$product_id}" id="forder-button"&#062;'. _wp('Fast Order') .'&#060;/a&#062;
+&#060;button href="{$wa->getUrl(\'/frontend/forder/\')}?id={$product_id}" id="forder-button"&#062;'. _wp('Fast Order') .'&#060;/button&#062;
 </p>',
-        'value'        => '<a href="{$wa_url}forder/?id={$product_id}" id="forder-button">'. _wp('Fast Order') .'</a>',
+        'value'        => '<button href="{$wa->getUrl(\'/frontend/forder/\')}?id={$product_id}" id="forder-button">'. _wp('Fast Order') .'</button>',
         'control_type' => waHtmlControl::TEXTAREA,
     ),
 
@@ -217,6 +217,7 @@ return array(
 <p id="button-style-origin">
 &#060;style&#062;
   #forder-button {
+    border: 0 none;
     border-radius: 2px;
     display: block;
     font-size: 1.1em;
@@ -235,6 +236,7 @@ return array(
 </p>',
         'value'        => '<style>
 #forder-button {
+    border: 0 none;
     border-radius: 2px;
     display: block;
     font-size: 1.1em;
