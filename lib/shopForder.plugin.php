@@ -21,6 +21,8 @@ class shopForderPlugin extends shopPlugin {
 
             $button_style = $view->fetch('string:' . $settings['button_style']);
 
+            $view->assign('forder_url', wa()->getRouteUrl('shop/frontend/forder/'));
+
             $html = $view->fetch($this->path.'/templates/FrontendHead.html');
 
             return $html;
@@ -48,7 +50,6 @@ class shopForderPlugin extends shopPlugin {
             $view->assign('product_id', $product_id);
             $view->assign('settings', $settings);
 
-            // $html = $view->fetch(realpath(dirname(__FILE__)."/../").'/templates/FrontendButton.html');
             $html = $view->fetch('string:' . $settings['button_template']);
 
             return $html;

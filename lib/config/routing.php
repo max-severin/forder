@@ -4,5 +4,6 @@
  * @author Max Severin <makc.severin@gmail.com>
  */
 return array(
-	'forder/' => 'frontend/forder/'
+	'forder/' => 'frontend/forder/',
+	'fordering/' => 'frontend/fordering/',
 );

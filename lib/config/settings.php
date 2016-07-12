@@ -25,22 +25,18 @@ return array(
         ),
     ),
 
-    'product_image' => array(
-        'title'        => _wp('Product image'),
-        'description'  => _wp('Show a product image in the form.'),
-        'value'        => 'off',
-        'control_type' => waHtmlControl::SELECT,
-        'options'      => array(
-            'off' => _wp('Off'),
-            'on'  => _wp('On'),
-        ),
-    ),
-
     'phone_masked_input' => array(
         'title'        => _wp('Masked input for phone'),
         'description'  => _wp('If fill this setting will added the mask for the field with the phone number.<br />Tip about masks characters:<br /><b>a</b> - All alphabetic values (A-Z, a-z)<br /><b>9</b> - All numeric values (0-9)<br /><b>*</b> - Any alphanumeric values (A-Z, a-z, 0-9).<br />Leave the field empty, if you do not need mask input.'),
         'placeholder'  => '+7 (999) 999-99-99',
         'value'        => '',
+        'control_type' => waHtmlControl::INPUT,
+    ),    
+
+    'product_thumbnail_size' => array(
+        'title'        => _wp('Thumbnail size of product image'),
+        'placeholder'  => '48x48',
+        'value'        => '48x48',
         'control_type' => waHtmlControl::INPUT,
     ),
 
@@ -95,13 +91,13 @@ return array(
     ),
     'style_form_height' => array(
         'title'        => _wp('Form height (px)'),
-        'description'  => _wp('Value range 360-540'),
+        'description'  => _wp('Value range 360-600'),
         'placeholder'  => '340',
         'value'        => '340',
         'control_type' => waHtmlControl::CUSTOM.' '.'shopForderPlugin::settingNumberControl',
         'options'      => array(
             'min'  => '360',
-            'max'  => '540',
+            'max'  => '600',
             'step' => '1',
         ),
     ),

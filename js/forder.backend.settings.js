@@ -48,6 +48,20 @@ var forderBackendSettings = (function () { "use strict";
         
         var form = $('<form />');
 
+        var productName = '{_wp("Test product name")}';
+        var productImage = '{$wa_static_url}/wa-apps/shop/plugins/forder/img/forder.48x48.png';
+
+
+        var productImageBackground = 'transparent url(' + productImage + ') no-repeat scroll center center / 100% auto';
+
+        var productInfo = '<div class="f-order-product-left"><div class="f-order-product-img" style="background: ' + productImageBackground + ';" title="' + productName + '"></div></div>';
+        productInfo    += '<div class="f-order-product-right">';
+        productInfo    += '<h3 class="f-order-product-name">' + productName + '</h3>';
+        productInfo    += '<input type="button" class="f-order-product-qty-minus" value="-" />';
+        productInfo    += '<input type="text" class="f-order-product-qty" placeholder="1" value="1" />';
+        productInfo    += '<input type="button" class="f-order-product-qty-plus" value="+" />';
+        productInfo    += '</div>';
+
         if (forderStatus === 'on' || statusChanged === true) {
             form.addClass('f-order-form').css({
                 'background': styleFormBackground,
@@ -55,6 +69,7 @@ var forderBackendSettings = (function () { "use strict";
                 'width': styleFormWidth
             }).prepend(
                 '<div class="f-order-header" style="' + styleHeaderBackground + styleHeaderTextColor + '">' + textHeaderTitle + '<span id="f-order-close-x">x</span></div>' +
+                '<div class="f-order-product">' + productInfo + '</div>' +
                 '<div class="f-order-input"><input type="text" name="name" placeholder="' + textNamePlaceholder + '" value="" /></div>' +
                 '<div class="f-order-input"><input type="text" name="phone" placeholder="' + textPhonePlaceholder + '" value="" /></div>' +
                 '<div class="f-order-input"><input type="text" name="email" placeholder="' + textEmailPlaceholder + '" value="" /></div>' +
@@ -318,6 +333,8 @@ var forderBackendSettings = (function () { "use strict";
         changeHandlers();
 
         checkCommentStatus();
+
+        $('#forder_shop_forder_product_thumbnail_size').mask('99x99');
 
         $('.plugin-links a#plugin-review').css({
             'display': 'block',

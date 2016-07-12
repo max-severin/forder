@@ -3,9 +3,11 @@
 
 <style type="text/css">
     {include file="../../../css/forder.frontend.css" inline}
-    
+
     {include file="../../../css/forder.backend.css" inline}
 </style>
+
+<script type="text/javascript" src="{$wa_url}wa-apps/shop/plugins/forder/js/jquery.maskedinput.min.js"></script>
 
 <script type="text/javascript">
     {include file="../../../js/forder.backend.settings.js"}
@@ -21,7 +23,7 @@
 
 <p class="helper-tip">
     [`To output the «Fast Order» link in shop frontend paste in the product template the following code`]:<br />
-    <b>&#123;shopForderPlugin::displayButton($product.id)&#125;</b> - [`as a method parameter it is necessary to specify the product id`].
+    <b>&#123;shopForderPlugin::displayButton($product)&#125;</b> - [`as a method parameter it is necessary to specify the product array`].
 </p>
 
 <div class="fields form">
