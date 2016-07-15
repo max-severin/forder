@@ -336,32 +336,6 @@ var forderBackendSettings = (function () { "use strict";
 
         $('#forder_shop_forder_product_thumbnail_size').mask('99x99');
 
-        $('.plugin-links a#plugin-review').css({
-            'display': 'block',
-            'top': '-2000px'
-        }).animate({
-            'top': '0'
-        }, 1500).animate({
-            'top': '-25px'
-        }, 100).animate({
-            'top': '-35px'
-        }, 100).animate({
-            'top': '0'
-        }, 250);
-
-        $('.plugin-links a#more-plugins').css({
-            'display': 'block',
-            'top': '-1000px'
-        }).animate({
-            'top': '0'
-        }, 1000).animate({
-            'top': '-25px'
-        }, 100).animate({
-            'top': '-35px'
-        }, 100).animate({
-            'top': '0'
-        }, 250);
-
         $('.plugin-links a#plugin-support').css({
             'display': 'block',
             'top': '-500px'
