@@ -61,14 +61,20 @@ var forderFrontend = (function () { "use strict";
 			productInfo    += '</div>';
 
 			$("body").css({ "overflow": "hidden" });
+			
+			var bgPrdImgText = '';
 
-			var test = $('<div />');
-			test.addClass('f-order-test').css({
-				'background': 'transparent url("' + productFullImage + '") no-repeat scroll center center / 75% auto',
-				'height': '{$forder_settings.style_form_height}px',
-				'width': '{$forder_settings.style_form_width}px'
-			});
-
+			{if isset($forder_settings.background_product_image) && $forder_settings.background_product_image === 'on'}	
+				if (productFullImage) {		
+					var bgPrdImg = $('<div />');
+					bgPrdImg.addClass('f-order-bg-prd-img').css({
+						'background': 'transparent url("' + productFullImage + '") no-repeat scroll center center / 75% auto',
+						'height': '{$forder_settings.style_form_height}px',
+						'width': '{$forder_settings.style_form_width}px'
+					});
+					var bgPrdImgText = $('<div>').append(bgPrdImg.clone()).html();
+				}
+			{/if}
 
 			bg.addClass('f-order-bg').css('height', ($(document).height())+'px');
 			form.addClass('f-order-form').css({
@@ -77,7 +83,7 @@ var forderFrontend = (function () { "use strict";
 				'width': '{$forder_settings.style_form_width}px',
 				'top' : formTop+'px'
 			}).prepend(
-				$('<div>').append(test.clone()).html() +
+				bgPrdImgText +
 				'<div class="f-order-header" style="background: #{$forder_settings.style_header_background}; color: #{$forder_settings.style_header_text_color};">{$forder_settings.text_header_title}<span id="f-order-close-x">x</span></div>' +
 				'<div class="f-order-product">' + productInfo + '</div>' +
 				'<div class="f-order-input"><input type="text" name="name" placeholder="{$forder_settings.text_name_placeholder}" value="" /></div>' +

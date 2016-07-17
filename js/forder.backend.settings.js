@@ -10,8 +10,8 @@ var forderBackendSettings = (function () { "use strict";
     var
         farbtastic_url = "{$wa_url}wa-content/js/farbtastic/farbtastic.js?{$wa->version(true)}",
         htmlTagsEncode, htmlTagsDecode,
-        addForderForm, checkCommentStatus, initColorPicker, setColorPickerElement, setColorPicker, onFormSubmit, changeColorPickerInputValue,
-        textBlockHtmlChange, textPlaceholderChange, textInputValueChange, styleChange, changeHandlers, onStatusChange, onCommentStatusChange,
+        addForderForm, checkCommentStatus, checkBgPrdImgStatus, initColorPicker, setColorPickerElement, setColorPicker, onFormSubmit, changeColorPickerInputValue,
+        textBlockHtmlChange, textPlaceholderChange, textInputValueChange, styleChange, changeHandlers, onStatusChange, onCommentStatusChange, onBgPrdImgStatusChange,
         initModule;
     //----------------- END MODULE SCOPE VARIABLES ----------------
 
@@ -62,12 +62,22 @@ var forderBackendSettings = (function () { "use strict";
         productInfo    += '<input type="button" class="f-order-product-qty-plus" value="+" />';
         productInfo    += '</div>';
 
+        var bgPrdImg = $('<div />');
+        bgPrdImg.addClass('f-order-bg-prd-img').css({
+            'background': 'transparent url("{$wa_static_url}/wa-apps/shop/plugins/forder/img/forder.48x48.png") no-repeat scroll center center / 75% auto',
+            'display': 'none',
+            'height': '{$forder_settings.style_form_height}px',
+            'width': '{$forder_settings.style_form_width}px'
+        });
+        var bgPrdImgText = $('<div>').append(bgPrdImg.clone()).html();
+
         if (forderStatus === 'on' || statusChanged === true) {
             form.addClass('f-order-form').css({
                 'background': styleFormBackground,
                 'height': styleFormHeight,
                 'width': styleFormWidth
             }).prepend(
+                bgPrdImgText +
                 '<div class="f-order-header" style="' + styleHeaderBackground + styleHeaderTextColor + '">' + textHeaderTitle + '<span id="f-order-close-x">x</span></div>' +
                 '<div class="f-order-product">' + productInfo + '</div>' +
                 '<div class="f-order-input"><input type="text" name="name" placeholder="' + textNamePlaceholder + '" value="" /></div>' +
@@ -82,6 +92,8 @@ var forderBackendSettings = (function () { "use strict";
             $('.f-order-form').fadeIn('500');
 
             checkCommentStatus();
+
+            checkBgPrdImgStatus();
         }
     };
 
@@ -90,6 +102,14 @@ var forderBackendSettings = (function () { "use strict";
 
         if (forderCommentStatus !== 'on') {
             $('textarea[name="comment"]').parent('.f-order-input').hide();
+        }
+    };
+
+    checkBgPrdImgStatus = function () {
+        var forderBgPrdImgStatus = $('#forder_shop_forder_background_product_image').val();
+
+        if (forderBgPrdImgStatus === 'on') {
+            $('.f-order-bg-prd-img').show();
         }
     };
 
@@ -230,6 +250,16 @@ var forderBackendSettings = (function () { "use strict";
         }
     };
 
+    onBgPrdImgStatusChange = function () {
+        var t = $(this);
+
+        if (t.val() === 'on') {
+            $('.f-order-bg-prd-img').show();
+        } else {
+            $('.f-order-bg-prd-img').hide();
+        }
+    };
+
     changeColorPickerInputValue = function (input, $color) {
         var color = 0xFFFFFF & parseInt(('' + input.value + 'FFFFFF').replace(/[^0-9A-F]+/gi, '').substr(0, 6), 16);
         $color.css('background', (0xF000000 | color).toString(16).toUpperCase().replace(/^F/, '#'));
@@ -244,6 +274,8 @@ var forderBackendSettings = (function () { "use strict";
         $('#forder_shop_forder_status').on('change', onStatusChange);
 
         $('#forder_shop_forder_comment_status').on('change', onCommentStatusChange);
+
+        $('#forder_shop_forder_background_product_image').on('change', onBgPrdImgStatusChange);
 
         addForderForm( $('#wa-plugins-content .form') );
 
@@ -333,6 +365,8 @@ var forderBackendSettings = (function () { "use strict";
         changeHandlers();
 
         checkCommentStatus();
+
+        checkBgPrdImgStatus();
 
         $('#forder_shop_forder_product_thumbnail_size').mask('99x99');
 

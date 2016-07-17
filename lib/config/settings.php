@@ -25,6 +25,16 @@ return array(
         ),
     ),
 
+    'background_product_image' => array(
+        'title'        => _wp('Product image on form background'),
+        'value'        => 'off',
+        'control_type' => waHtmlControl::SELECT,
+        'options'      => array(
+            'off' => _wp('Off'),
+            'on'  => _wp('On'),
+        ),
+    ),
+
     'phone_masked_input' => array(
         'title'        => _wp('Masked input for phone'),
         'description'  => _wp('If fill this setting will added the mask for the field with the phone number.<br />Tip about masks characters:<br /><b>a</b> - All alphabetic values (A-Z, a-z)<br /><b>9</b> - All numeric values (0-9)<br /><b>*</b> - Any alphanumeric values (A-Z, a-z, 0-9).<br />Leave the field empty, if you do not need mask input.'),
